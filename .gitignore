@@ -186,3 +186,11 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,intellij,java,maven
+
+### logs ###
+*.log
+logs
+
+### tomcat ###
+# conf
+.smarttomcat
