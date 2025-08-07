@@ -194,3 +194,6 @@ logs
 ### tomcat ###
 conf
 .smarttomcat
+
+### servlets ###
+work

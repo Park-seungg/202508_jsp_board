@@ -38,3 +38,8 @@
 127.0.0.1 - - [07/Aug/2025:14:48:47 +0900] "GET /gugudan.jsp?dan=8&limit=9 HTTP/1.1" 500 2677
 127.0.0.1 - - [07/Aug/2025:14:49:51 +0900] "GET /gugudan.jsp?dan=5&limit=12 HTTP/1.1" 500 2677
 127.0.0.1 - - [07/Aug/2025:14:49:57 +0900] "GET /gugudan.jsp HTTP/1.1" 500 2677
+127.0.0.1 - - [07/Aug/2025:14:52:14 +0900] "GET /gugudan.jsp?dan=5&limit=12 HTTP/1.1" 200 513
+127.0.0.1 - - [07/Aug/2025:15:21:56 +0900] "GET /gugudan.jsp?dan=5&limit=12 HTTP/1.1" 200 367
+127.0.0.1 - - [07/Aug/2025:15:23:17 +0900] "GET /gugudan.jsp?dan=5&limit=12 HTTP/1.1" 200 367
+127.0.0.1 - - [07/Aug/2025:15:23:18 +0900] "GET /gugudan.jsp?dan=5&limit=12 HTTP/1.1" 200 367
+127.0.0.1 - - [07/Aug/2025:15:25:02 +0900] "GET /gugudan.jsp?dan=5&limit=12 HTTP/1.1" 200 367
