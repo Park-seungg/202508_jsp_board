@@ -18,6 +18,7 @@ public class GugudanServlet extends HttpServlet {
         int dan = rq.getIntParam("dan", 9); // 구구단의 단을 8로 설정
         int limit = rq.getIntParam("limit", 9); // 구구단의 곱셈 범위
 
+        // http://localhost:8080/gugudan?dan=5&limit=12
         rq.writer("<h1>== 구구단 %d단 ==</h1>".formatted(dan));
         for (int i = 1; i <= limit; i++) {
             rq.writer("<div>%d * %d = %d</div>".formatted(dan, i, dan * i));
