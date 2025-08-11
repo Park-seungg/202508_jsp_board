@@ -51,7 +51,7 @@ public class Rq {
         return value;
     }
 
-    public void appendBody(String str) {
+    public void print(String str) {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
@@ -108,7 +108,7 @@ public class Rq {
         }
     }
 
-    public String getPathValueByIndex(int index,  String defaultValue) {
+    public String getPathValueByIndex(int index, String defaultValue) {
         String[] bits = req.getRequestURI().split("/");
         // /usr/article/detail/1
         // ["", "usr", "article", "detail", "1"]
@@ -117,5 +117,27 @@ public class Rq {
         } catch (ArrayIndexOutOfBoundsException e) {
             return defaultValue;
         }
+    }
+
+    public void println(String str) {
+        print(str + "\n");
+    }
+
+    public void replace(String msg, String url) {
+        println("""
+                <script>
+                    alert("%s");
+                    location.replace("%s");
+                </script>
+                """.formatted(msg, url));
+    }
+
+    public void historyBack(String msg) {
+        println("""
+                <script>
+                    alert("%s");
+                    history.back();
+                </script>
+                """.formatted(msg));
     }
 }
