@@ -46,6 +46,15 @@ public class ArticleRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void modify(long id, String title, String content) {
+        Article article = findById(id);
+
+        if (article == null) return;
+
+        article.setTitle(title);
+        article.setContent(content);
+    }
 }
 
 

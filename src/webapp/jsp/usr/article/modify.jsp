@@ -52,7 +52,7 @@
             <textarea id="content"
                       name="content"
                       placeholder="내용을 입력해주세요"
-                      required>{article.content}</textarea>
+                      required>${article.content}</textarea>
         </div>
 
         <div>
