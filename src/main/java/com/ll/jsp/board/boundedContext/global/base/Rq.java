@@ -71,6 +71,7 @@ public class Rq {
             throw new RuntimeException("뷰로의 포워딩 중 IO 오류가 발생했습니다.", e);
         }
     }
+
     public void getAttr(String name) {
         req.getAttribute(name);
     }
@@ -79,16 +80,42 @@ public class Rq {
         req.setAttribute(name, value);
     }
 
-    public String getUrlPath(){
+    public String getUrlPath() {
         return req.getRequestURI();
     }
-    public String getMethod(){
+
+    public String getMethod() {
         return req.getMethod();
     }
 
-    public String getActionPath(){
+    public String getActionPath() {
         String[] bits = req.getRequestURI().split("/");
 
         return "/%s/%s/%s".formatted(bits[1], bits[2], bits[3]);
+    }
+
+    public long getLongPathValueByIndex(int index, int defaultValue) {
+        String value = getPathValueByIndex(index, null);
+
+        if (value == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    public String getPathValueByIndex(int index,  String defaultValue) {
+        String[] bits = req.getRequestURI().split("/");
+        // /usr/article/detail/1
+        // ["", "usr", "article", "detail", "1"]
+        try {
+            return bits[3 + index];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return defaultValue;
+        }
     }
 }
