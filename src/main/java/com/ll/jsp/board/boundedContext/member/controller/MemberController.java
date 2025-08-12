@@ -10,7 +10,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    public MemberController () {
+    public MemberController() {
         memberService = Container.memberService;
     }
 
@@ -21,20 +21,20 @@ public class MemberController {
     public void doJoin(Rq rq) {
         String username = rq.getParam("username", "");
 
-        if(username.trim().isBlank()) {
+        if (username.trim().isBlank()) {
             rq.replace("로그인 아이디를 입력해주세요.", "/usr/member/join");
             return;
         }
 
         String password = rq.getParam("password", "");
 
-        if(username.trim().isBlank()) {
+        if (username.trim().isBlank()) {
             rq.replace("로그인 비밀번호 입력해주세요.", "/usr/member/join");
             return;
         }
         String name = rq.getParam("name", "");
 
-        if(username.trim().isBlank()) {
+        if (username.trim().isBlank()) {
             rq.replace("이름을 입력해주세요.", "/usr/member/join");
             return;
         }
@@ -42,7 +42,7 @@ public class MemberController {
         Member member = memberService.findByUsername(username);
 
         if (member != null) {
-            rq.replace("이미 가입된 회원입니다.",  "/usr/member/join");
+            rq.replace("이미 가입된 회원입니다.", "/usr/member/join");
             return;
         }
 
@@ -84,6 +84,14 @@ public class MemberController {
 
         rq.setSessionAttr("loggedInMember", member);
 
-        rq.replace("%s 님 로그인 되었습니다. 반갑습니다.".formatted(username), "/" );
+        rq.replace("%s 님 로그인 되었습니다. 반갑습니다.".formatted(username), "/");
+    }
+
+    public void doLogout(Rq rq) {
+        {
+            rq.removeSessionAttr("loggedInMember");
+
+            rq.replace("로그아웃 되었습니다.", "/");
+        }
     }
 }
