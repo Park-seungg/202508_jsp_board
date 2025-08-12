@@ -5,5 +5,6 @@
 <div>
     <a href="/usr/article/list">게시물 목록</a>
     <a href="/usr/member/join">회원가입</a>
+    <a href="/usr/member/login">로그인</a>
 </div>
 
