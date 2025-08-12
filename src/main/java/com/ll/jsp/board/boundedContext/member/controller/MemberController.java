@@ -2,6 +2,7 @@ package com.ll.jsp.board.boundedContext.member.controller;
 
 import com.ll.jsp.board.boundedContext.base.Container;
 import com.ll.jsp.board.boundedContext.global.base.Rq;
+import com.ll.jsp.board.boundedContext.member.dto.Member;
 import com.ll.jsp.board.boundedContext.member.service.MemberService;
 
 
@@ -19,8 +20,31 @@ public class MemberController {
 
     public void doJoin(Rq rq) {
         String username = rq.getParam("username", "");
+
+        if(username.trim().isBlank()) {
+            rq.replace("로그인 아이디를 입력해주세요.", "/usr/member/join");
+            return;
+        }
+
         String password = rq.getParam("password", "");
+
+        if(username.trim().isBlank()) {
+            rq.replace("로그인 비밀번호 입력해주세요.", "/usr/member/join");
+            return;
+        }
         String name = rq.getParam("name", "");
+
+        if(username.trim().isBlank()) {
+            rq.replace("이름을 입력해주세요.", "/usr/member/join");
+            return;
+        }
+
+        Member member = memberService.findByUsername(username);
+
+        if (member != null) {
+            rq.replace("이미 가입된 회원입니다.",  "/usr/member/join");
+            return;
+        }
 
         memberService.join(username, password, name);
 
