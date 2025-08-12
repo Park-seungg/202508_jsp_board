@@ -24,13 +24,14 @@
         <a href="/usr/article/modify/${article.id}">수정</a>
     </div>
 
-    <a herf="#" id="deleteLinkBtn">삭제</a>
+    <a href="#" id="deleteLinkBtn">삭제</a>
 
     <form
             id="deleteForm"
-            action="/usr/article/delete/${article.id}"
+            action="/usr/article/delete"
             method="POST"
     >
+        <input type="hidden" value="${article.id}" readonly>
     </form>
 </div>
 
