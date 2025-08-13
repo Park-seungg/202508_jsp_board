@@ -38,4 +38,8 @@ public class ArticleService {
     public void delete(long id) {
         articleRepository.delete(id);
     }
+
+    public ArticleDto joinMemberFindById(long id) {
+        return articleRepository.joinMemberFindById(id);
+    }
 }

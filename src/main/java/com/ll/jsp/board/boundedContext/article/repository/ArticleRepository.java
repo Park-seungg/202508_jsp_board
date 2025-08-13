@@ -60,6 +60,19 @@ public class ArticleRepository {
         return id;
     }
 
+    public ArticleDto joinMemberFindById(long id) {
+        // v1 DB 단건 조회
+        Map<String, Object> row = dbConnection.selectRow("""
+                SELECT A.id, A.title, A.content, M.username, A.regDate 
+                FROM `article` as A
+                INNER JOIN `member` AS M
+                ON A.member_id = M.id
+                WHERE A.id = %d
+                """.formatted(id));
+
+        return new ArticleDto(row);
+    }
+
     public Article findById(long id) {
         // v1 DB 단건 조회
         Map<String, Object> row = dbConnection.selectRow("select * from article where id = %d".formatted(id));
