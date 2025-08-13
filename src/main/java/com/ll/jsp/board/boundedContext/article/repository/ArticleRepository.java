@@ -20,8 +20,6 @@ public class ArticleRepository {
         makeTestData();
         lastId = articleList.get(articleList.size() -1).getId();
         dbConnection = Container.dbConnection;
-
-        dbConnection.connect();
     }
 
     void makeTestData() {
