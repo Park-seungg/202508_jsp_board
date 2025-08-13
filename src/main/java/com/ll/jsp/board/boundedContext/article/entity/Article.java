@@ -1,4 +1,4 @@
-package com.ll.jsp.board.boundedContext.article.dto;
+package com.ll.jsp.board.boundedContext.article.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +16,7 @@ public class Article {
     private long id;
     private String title;
     private String content;
+    private long memberId;
     private String regDate;
 
     public Article(Map<String, Object> row) {
