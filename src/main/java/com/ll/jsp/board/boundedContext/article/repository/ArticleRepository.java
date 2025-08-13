@@ -7,48 +7,54 @@ import com.ll.jsp.board.db.DBConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.LongStream;
-
 
 public class ArticleRepository {
     private List<Article> articleList;
-    private DBConnection dbConnection;
+    DBConnection dbConnection;
 
     public ArticleRepository() {
-        articleList = new ArrayList<>();
-        makeTestData();
         dbConnection = Container.dbConnection;
     }
 
-    void makeTestData() {
-        LongStream.rangeClosed(1, 5).forEach(i -> {
-            Article article = new Article(i, "제목 " + i, "내용 " + i);
-            articleList.add(article);
-        });
-    }
-
     public List<Article> findAll() {
-        List<Map<String, Object>> rows = dbConnection.selectRows("SELECT * FROM article");
+        articleList = new ArrayList<>();
+
+        List<Map<String, Object>> rows = dbConnection.selectRows("select * from article");
         System.out.println(rows);
 
         for (Map<String, Object> row : rows) {
-            Article article = new Article(row);
+            Article article  = new Article(row);
+
             articleList.add(article);
         }
-            return articleList;
+
+        return articleList;
     }
 
     public long save(String title, String content) {
-        int id = dbConnection.insert("INSERT INTO article SET title = '%s', content = '%s'".formatted(title, content));
+        int id = dbConnection.insert(""" 
+                            INSERT INTO article 
+                            SET 
+                            title='%s', 
+                            content='%s'
+                        """.formatted(title, content));
 
         return id;
     }
 
     public Article findById(long id) {
-        return articleList.stream()
-                .filter(article -> article.getId() == id)
-                .findFirst()
-                .orElse(null);
+        // v1 DB 단건 조회
+        Map<String, Object> row = dbConnection.selectRow("select * from article where id = %d".formatted(id));
+
+        return new Article(row);
+
+//        v2 - 전체 조회 후 리스트 탐색
+//        List<Article> articleList = findAll();
+//
+//        return articleList.stream()
+//                .filter(article -> article.getId() == id)
+//                .findFirst()
+//                .orElse(null);
     }
 
     public void modify(long id, String title, String content) {
@@ -68,5 +74,3 @@ public class ArticleRepository {
         articleList.remove(article);
     }
 }
-
-
